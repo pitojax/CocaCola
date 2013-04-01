@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2013 3:29:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.MdcOutlet" table="mdc_outlet" catalog="cocacola_db">
+        <id name="idmdcOutlet" type="java.lang.Integer">
+            <column name="idmdc_outlet" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="outlet" class="model.Outlet" fetch="select">
+            <column name="outlet_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="routes" class="model.Routes" fetch="select">
+            <column name="route_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="channel" class="model.Channel" fetch="select">
+            <column name="channel" not-null="true" />
+        </many-to-one>
+        <many-to-one name="glassHolding" class="model.GlassHolding" fetch="select">
+            <column name="glass_holding" not-null="true" />
+        </many-to-one>
+        <many-to-one name="redClass" class="model.RedClass" fetch="select">
+            <column name="red_class" not-null="true" />
+        </many-to-one>
+        <many-to-one name="assets" class="model.Assets" fetch="select">
+            <column name="other_assets" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="model.Users" fetch="select">
+            <column name="users_id" not-null="true" />
+        </many-to-one>
+        <property name="serialNo" type="string">
+            <column name="serial_no" length="85" not-null="true" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="remarks" length="445" />
+        </property>
+        <property name="date" type="timestamp">
+            <column name="date" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

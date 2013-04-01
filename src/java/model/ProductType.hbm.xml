@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2013 3:29:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.ProductType" table="product_type" catalog="cocacola_db">
+        <id name="idproductType" type="java.lang.Integer">
+            <column name="idproduct_type" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="users" class="model.Users" fetch="select">
+            <column name="users_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <property name="details" type="string">
+            <column name="details" length="445" not-null="true" />
+        </property>
+        <property name="datetime" type="timestamp">
+            <column name="datetime" length="19" not-null="true" />
+        </property>
+        <set name="stockControls" inverse="true">
+            <key>
+                <column name="product_type_id" not-null="true" />
+            </key>
+            <one-to-many class="model.StockControl" />
+        </set>
+        <set name="productPackages" inverse="true">
+            <key>
+                <column name="product_type" not-null="true" />
+            </key>
+            <one-to-many class="model.ProductPackage" />
+        </set>
+        <set name="productSizes" inverse="true">
+            <key>
+                <column name="product_type" not-null="true" />
+            </key>
+            <one-to-many class="model.ProductSize" />
+        </set>
+        <set name="deliveredItems" inverse="true">
+            <key>
+                <column name="product_type" not-null="true" />
+            </key>
+            <one-to-many class="model.DeliveredItem" />
+        </set>
+    </class>
+</hibernate-mapping>

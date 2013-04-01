@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cocacola_db</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <mapping resource="model/QuantityTypes.hbm.xml"/>
+    <mapping resource="model/MdcOutlet.hbm.xml"/>
+    <mapping resource="model/RedCardScore.hbm.xml"/>
+    <mapping resource="model/Tracks.hbm.xml"/>
+    <mapping resource="model/RedClass.hbm.xml"/>
+    <mapping resource="model/UserType.hbm.xml"/>
+    <mapping resource="model/GlassHolding.hbm.xml"/>
+    <mapping resource="model/DeliveredItem.hbm.xml"/>
+    <mapping resource="model/Users.hbm.xml"/>
+    <mapping resource="model/Channel.hbm.xml"/>
+    <mapping resource="model/Routes.hbm.xml"/>
+    <mapping resource="model/Outlet.hbm.xml"/>
+    <mapping resource="model/AssetType.hbm.xml"/>
+    <mapping resource="model/DcOwner.hbm.xml"/>
+    <mapping resource="model/StockControl.hbm.xml"/>
+    <mapping resource="model/ProductSize.hbm.xml"/>
+    <mapping resource="model/ProductType.hbm.xml"/>
+    <mapping resource="model/ProductPackage.hbm.xml"/>
+    <mapping resource="model/DcInfo.hbm.xml"/>
+    <mapping resource="model/Assets.hbm.xml"/>
+    <mapping resource="model/Delivery.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

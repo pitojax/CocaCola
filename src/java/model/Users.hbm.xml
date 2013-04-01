@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2013 3:29:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.Users" table="users" catalog="cocacola_db">
+        <id name="idusers" type="java.lang.Integer">
+            <column name="idusers" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userType" class="model.UserType" fetch="select">
+            <column name="user_type" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usersByUsersId" class="model.Users" fetch="select">
+            <column name="users_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usersByUpdatedBy" class="model.Users" fetch="select">
+            <column name="updated_by" />
+        </many-to-one>
+        <property name="username" type="string">
+            <column name="username" length="45" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="fname" type="string">
+            <column name="fname" length="45" not-null="true" />
+        </property>
+        <property name="lname" type="string">
+            <column name="lname" length="45" not-null="true" />
+        </property>
+        <property name="date" type="timestamp">
+            <column name="date" length="19" not-null="true" />
+        </property>
+        <property name="isDeleted" type="int">
+            <column name="is_deleted" not-null="true" />
+        </property>
+        <property name="lastUpdated" type="timestamp">
+            <column name="last_updated" length="19" not-null="true" />
+        </property>
+        <set name="usersesForUpdatedBy" inverse="true">
+            <key>
+                <column name="updated_by" />
+            </key>
+            <one-to-many class="model.Users" />
+        </set>
+        <set name="usersesForUsersId" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Users" />
+        </set>
+        <set name="stockControls" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.StockControl" />
+        </set>
+        <set name="channels" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Channel" />
+        </set>
+        <set name="deliveredItems" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.DeliveredItem" />
+        </set>
+        <set name="redCardScores" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.RedCardScore" />
+        </set>
+        <set name="assetses" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Assets" />
+        </set>
+        <set name="userTypes" inverse="true">
+            <key>
+                <column name="users_id" />
+            </key>
+            <one-to-many class="model.UserType" />
+        </set>
+        <set name="assetTypes" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.AssetType" />
+        </set>
+        <set name="mdcOutlets" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.MdcOutlet" />
+        </set>
+        <set name="outlets" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Outlet" />
+        </set>
+        <set name="dcInfos" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.DcInfo" />
+        </set>
+        <set name="trackses" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Tracks" />
+        </set>
+        <set name="deliveries" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Delivery" />
+        </set>
+        <set name="productPackages" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.ProductPackage" />
+        </set>
+        <set name="routeses" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Routes" />
+        </set>
+        <set name="quantityTypeses" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.QuantityTypes" />
+        </set>
+        <set name="productTypes" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.ProductType" />
+        </set>
+        <set name="redClasses" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.RedClass" />
+        </set>
+        <set name="productSizes" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.ProductSize" />
+        </set>
+        <set name="glassHoldings" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.GlassHolding" />
+        </set>
+        <set name="dcOwners" inverse="true">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="model.DcOwner" />
+        </set>
+    </class>
+</hibernate-mapping>

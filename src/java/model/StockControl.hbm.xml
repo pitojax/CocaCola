@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 29, 2013 3:29:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="model.StockControl" table="stock_control" catalog="cocacola_db">
+        <id name="idstockControl" type="java.lang.Integer">
+            <column name="idstock_control" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="productType" class="model.ProductType" fetch="select">
+            <column name="product_type_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="model.Users" fetch="select">
+            <column name="users_id" not-null="true" />
+        </many-to-one>
+        <property name="openningStock" type="int">
+            <column name="openning_stock" not-null="true" />
+        </property>
+        <property name="cdcDeliveredStock" type="int">
+            <column name="cdc_delivered_stock" not-null="true" />
+        </property>
+        <property name="totalFlowStock" type="int">
+            <column name="total_flow_stock" not-null="true" />
+        </property>
+        <property name="expiredStock" type="int">
+            <column name="expired_stock" not-null="true" />
+        </property>
+        <property name="priorDaySales" type="int">
+            <column name="prior_day_sales" not-null="true" />
+        </property>
+        <property name="targetSales" type="int">
+            <column name="target_sales" not-null="true" />
+        </property>
+        <property name="emptiesAvailable" type="int">
+            <column name="empties_available" not-null="true" />
+        </property>
+        <property name="order" type="int">
+            <column name="order__" not-null="true" />
+        </property>
+        <property name="date" type="timestamp">
+            <column name="date" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

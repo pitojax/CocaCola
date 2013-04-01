@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="cocacola_db"/>
+  <table-filter match-name="quantity_types"/>
+  <table-filter match-name="users"/>
+  <table-filter match-name="channel"/>
+  <table-filter match-name="product_type"/>
+  <table-filter match-name="asset_type"/>
+  <table-filter match-name="product_package"/>
+  <table-filter match-name="mdc_outlet"/>
+  <table-filter match-name="delivered_item"/>
+  <table-filter match-name="dc_owner"/>
+  <table-filter match-name="product_size"/>
+  <table-filter match-name="glass_holding"/>
+  <table-filter match-name="outlet"/>
+  <table-filter match-name="dc_info"/>
+  <table-filter match-name="delivery"/>
+  <table-filter match-name="tracks"/>
+  <table-filter match-name="red_class"/>
+  <table-filter match-name="assets"/>
+  <table-filter match-name="user_type"/>
+  <table-filter match-name="red_card_score"/>
+  <table-filter match-name="stock_control"/>
+  <table-filter match-name="routes"/>
+</hibernate-reverse-engineering>
