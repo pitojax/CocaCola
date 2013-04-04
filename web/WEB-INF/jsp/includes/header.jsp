@@ -44,6 +44,7 @@
         
         <script type="text/javascript">
             var url_context_path = "<%= request.getContextPath()%>";
+            jQuery.noConflict();
         </script>
         <meta charset="UTF-8"></head>
 
@@ -82,7 +83,7 @@
                     <div id="userPanel" class="headercolumn">
                         <a href="" class="userinfo radius2">
                             <img src="<%= request.getContextPath()%>/Resources/images/avatar.png" alt="" class="radius2" />
-                            <span><strong><%= session.getAttribute("session_username")%></strong></span>
+                            <span><strong><%= session.getAttribute("session_username")%><%= session.getAttribute("session_id")%></strong></span>
                         </a>
                         <div class="userdrop">
                             <ul>

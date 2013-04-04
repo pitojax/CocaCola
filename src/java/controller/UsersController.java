@@ -1,8 +1,6 @@
 package controller;
 
 import controller.command.Users;
-import controller.domain.JsonResponse;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,13 +11,11 @@ import javax.servlet.http.HttpSession;
 import model.UserType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -53,14 +49,46 @@ public class UsersController {
         return "users";
     }
 
-    @RequestMapping(value = "/users_detials", headers = "Accept=*/*", method = RequestMethod.POST)
-    public @ResponseBody
-    JsonResponse usersDetails() {
-        JsonResponse res = new JsonResponse();
-        res.setStatus("SUCCESS");
-        res.setResult(usersService.getAllUsers());
+    @RequestMapping(value = "/users_detials", method = RequestMethod.POST)
+    public String usersDetails(ModelMap map, HttpServletResponse response) {
+        map.put("usersList", usersService.getAllUsers());
+        return "users_details";
+    }
 
-        return res;
+    @RequestMapping(value = "/get_all_users_detials", method = RequestMethod.POST)
+    public @ResponseBody
+    String getAllUsersDetails(ModelMap map, HttpServletResponse response) {
+        String details = "";
+        Object[][] arr = usersService.getAllUsers();
+        for (int i = 0; i < arr.length; i++) {
+            details += "<tr>\n"
+                    + "            <td class=\"center\"><input type=\"checkbox\" /></td>\n"
+                    + "            <td>" + arr[i][0] + " </td>\n"
+                    + "            <td>" + arr[i][1] + "</td>\n"
+                    + "            <td>" + arr[i][2] + "</td>\n"
+                    + "            <td class=\"center\"> " + arr[i][3] + " </td>\n"
+                    + "            <td class=\"center\"> " + arr[i][4] + "</td>\n"
+                    + "            <td class=\"center\"><img style=\"cursor: pointer;\" src=\"<%= request.getContextPath()%>/Resources/images/icons/cc_edit.png\" alt=\"Edit\" title=\"Edit\" /> &nbsp; <img style=\"cursor: pointer;\" id=\"deleteUser" + arr[i][5] + "\" src=\"<%= request.getContextPath()%>/Resources/images/icons/cc_delete.png\" alt=\"Delete\" title=\"Trash\" /></td>\n"
+                    + "        </tr>";
+
+            details += "<script type=\"text/javascript\">\n"
+                    + "        jQuery.noConflict();\n"
+                    + "        (function($) {\n"
+                    + "            $('#deleteUser" + arr[i][5] + "').click(function() {\n"
+                    + "                 $.ajax({\n"
+                    + "                    url: url_context_path + \"/delete_user\",\n"
+                    + "                    type: \"GET\",\n"
+                    + "                    data: {userId: " + arr[i][5] + "},\n"
+                    + "                    success: function(data) {\n"
+                    + "                        getAllUsersDetails();\n"
+                    + "                    }\n"
+                    + "                });"
+                    + "              });\n"
+                    + "        })(jQuery);\n"
+                    + "    </script>";
+
+        }
+        return details;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
@@ -103,14 +131,13 @@ public class UsersController {
         return "users";
     }
 
-    @RequestMapping(value = "/delete_user", method = RequestMethod.DELETE)
-    public String deleteUsers(@ModelAttribute(value = "users") Users users, HttpServletRequest request, ModelMap mv) {
+    @RequestMapping(value = "/delete_user", method = RequestMethod.GET)
+    public @ResponseBody
+    String deleteUsers(@RequestParam(value = "usersId", required = true) int usersId, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
         Integer session_id = Integer.valueOf(session.getAttribute("session_id").toString());
-        mv.addAttribute("deleteUserMessage", usersService.deleteUser(request.getParameter("user_id"), session_id));
-        mv.addAttribute("userstypeList", usersTypeList());
-        mv.addAttribute("usersList", usersService.getAllUsers());
-        return "users";
+        System.out.println(usersId);
+        return usersService.deleteUser(usersId, session_id);
     }
 }

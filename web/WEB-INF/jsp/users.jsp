@@ -33,10 +33,7 @@
                     type: "POST",
                     data: {},
                     success: function(response) {
-                        if (response.status === "SUCCESS") {
-                            $("#usersdetails").html(url_context_path + response.result);
-                        }
-
+                            $("#usersdetails").replaceWith(response);
                     },
                     error: function(e) {
                         $("#usersdetails").html(e);

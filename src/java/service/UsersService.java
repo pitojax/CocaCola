@@ -115,7 +115,7 @@ public class UsersService {
                 referencedata[i][2] = st.getUserType().getName();
                 referencedata[i][3] = st.getUsersByUsersId().getFname() + " " + st.getUsersByUsersId().getLname();
                 referencedata[i][4] = st.getDate();
-                referencedata[i][5] = crypto.encode(st.getIdusers().toString());
+                referencedata[i][5] = st.getIdusers();
             }
 
             transaction.commit();
@@ -195,11 +195,11 @@ public class UsersService {
         return "User data successfully updated";
     }
 
-    public String deleteUser(String usersid, int session_id) {
+    public String deleteUser(int usersid, int session_id) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Users user = (Users) session.get(Users.class, Integer.parseInt(crypto.decode(usersid)));
+            Users user = (Users) session.get(Users.class, usersid);
             user.setIsDeleted(1);
             session.update(user);
             transaction.commit();
