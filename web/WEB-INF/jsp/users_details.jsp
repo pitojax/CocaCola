@@ -58,7 +58,7 @@
 
             function getAllUsersDetails() {
                 $.ajax({
-                    url: url_context_path + "/get_all_users_detials",
+                    url: url_context_path + "/get_all_users_detials?userId=9",
                     type: "POST",
                     success: function(response) {
                         $("#getAllUsersDetails").html(response);
